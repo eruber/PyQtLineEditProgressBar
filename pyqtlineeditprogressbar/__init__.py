@@ -1,31 +1,41 @@
 
 """
-PyQtLineEditProgressBar
+.. module:: pyqtlineeditprogressbar
 
-This module subclass Qt's QtLineEdit widget to manage a progress
-bar the is displayed as the background color of the QtLineEdit.
+.. moduleauthor: E.R. Uber <eruber@gmail.com>
 
-REFERENCE:
-https://stackoverflow.com/questions/36972132/how-to-turn-qlineedit-background-into-a-progress-bar
+
+**PyQtLineEditProgressBar**
+
+This module subclasses Qt's QtLineEdit widget to manage a progress bar
+that is displayed as the background color of the QtLineEdit widget.
+
+REFERENCE
+---------
+The idea for this package came from a `discussion on StackOverflow <https://stackoverflow.com/questions/36972132/how-to-turn-qlineedit-background-into-a-progress-bar>`_.
 
 GPL LICENSE
+-----------
 This file is part of the PyQtLineEditProgressBar package.
 
-AutoFoE is free software: you can redistribute it and/or modify
+PyQtLineEditProgressBar is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
 the Free Software Foundation, either version 3 of the License, or
 (at your option) any later version.
 
-AutoFoE is distributed in the hope that it will be useful,
+PyQtLineEditProgressBar is distributed in the hope that it will be useful,
 but WITHOUT ANY WARRANTY; without even the implied warranty of
 MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 GNU General Public License for more details.
 
 You should have received a copy of the GNU General Public License
-along with AutoFoE in the file named COPYING. If not, 
+along with PyQtLineEditProgressBar in the file named LICENSE. If not, 
 see <https://www.gnu.org/licenses/>.
 
 COPYRIGHT (C) 2019-2020 E.R. Uber (eruber@gmail.com)
+
+Class PyQtLineEditProgressBar
+-----------------------------
 
 """
 # ----------------------------------------------------------------------------
@@ -54,7 +64,7 @@ DEFAULT_COLOR_RED    = '#ffa5aa'   # A pastel red
 DEFAULT_COLOR_BLUE   = '#b3fff4'   # A pastel blue   
 DEFAULT_COLOR_ORANGE = '#ffcc74'   # A pastel orange
 DEFAULT_COLOR_YELLOW = '#ffff00'   # A pastel yellow
-DEFAULT_COLOR_PURPLE = '#e4b7ff'   # A pastel yellow
+DEFAULT_COLOR_PURPLE = '#e4b7ff'   # A pastel purple
 
 EMBEDDED_COLORS = {
 	DECN[0] : DEFAULT_COLOR_GREEN, 
@@ -99,7 +109,69 @@ class PyQtLineEditProgressBar(QtWidgets.QLineEdit):
 				behavior=DEFAULT_BEHAVIOR,
 				text_for_bounding_rect=None,
 				):
+		"""Constructor for the PyQtLineEditProgressBar Class
 
+		Parameters
+		----------
+		contents : str, optional
+		  Text displayed in the LineEdit widget (optional, can be set later with setText() method).
+
+		parent : widget reference, optional
+		  The parent widget.
+
+		read_only : bool, optional
+		  Defaults to True which makes the LineEdit widget read only.
+
+		progressbar_color : str, optional
+		  This must be a string describing a color, such as #1435fe. This field 
+		  is validated using the `colour package <https://pypi.org/project/colour/>`_. 
+		  Any color specifier accepted by **colour** will pass input validation.
+
+		  If you're not feeling creative enough to specify your own custom color via
+		  the **progressbar_color** parameter, there are six built-in color constants 
+		  that can be specified here:
+
+		    **pyqtlineeditprogressbar.DEFAULT_COLOR_GREEN**
+		    **pyqtlineeditprogressbar.DEFAULT_COLOR_RED**
+		    **pyqtlineeditprogressbar.DEFAULT_COLOR_ORANGE**
+		    **pyqtlineeditprogressbar.DEFAULT_COLOR_BLUE**
+		    **pyqtlineeditprogressbar.DEFAULT_COLOR_YELLOW**
+		    **pyqtlineeditprogressbar.DEFAULT_COLOR_PURPLE**
+
+		  If not specified, **DEFAULT_COLOR_GREEN**, is used.
+
+		  See the :ref:`intro_label` for a visual of the colors.
+
+		behavior : str, optional
+		  A rather complicated looking string that identifies one of the four possible
+		  behaviors of the progress bar:
+
+		  	**pyqtlineeditprogressbar.STARTS_EMPTY_FILLS_LEFT_TO_RIGHT**
+			**pyqtlineeditprogressbar.STARTS_EMPTY_FILLS_RIGHT_TO_LEFT**
+			**pyqtlineeditprogressbar.STARTS_FULL_EMPTIES_LEFT_TO_RIGHT**
+			**pyqtlineeditprogressbar.STARTS_FULL_EMPTIES_RIGHT_TO_LEFT**
+
+		  See the :ref:`intro_label` for a visual of the above four behaviors.
+
+		text_for_bounding_rect : str, optional
+		  If you have trouble in layout sizing the LineEdit widget's width, and the 
+		  contents of this LineEdit widget have a fixed format, then this parameter 
+		  may be specified to be used by the overridden sizeHint() method to access
+		  the Qt Font Metrics sub-system to specify a width width for the font 
+		  being used. For example:
+
+		  	text_for_bounding_rect=" 888/888 [88] "
+
+		  If not specified, then the standard Qt sizeHint() is called.
+
+
+		Returns
+		-------
+		PyQtLineEditProgressBar object
+			An initialized PyQtLineEditProgressBar object with all the power
+			of a normal QLineEdit widget plus a progressbar!!
+
+		"""
 		super(PyQtLineEditProgressBar, self).__init__(parent=parent) 
 
 		self._parent   = parent
@@ -146,6 +218,23 @@ class PyQtLineEditProgressBar(QtWidgets.QLineEdit):
 	# -------------------------------------------------------------------------
 	
 	def sizeHint(self):
+		"""This overrides QLineEdit's sizeHint() method only if the constructor
+		parameter **text_for_bounding_rect** is specified. In which case the
+		**text_for_bounding_rect** is used to produce a bounding rectangle that is
+		used to return a QSize item from sizeHint(); otherwise, Qt's standard
+		sizeHint() method is called.
+
+		Parameters
+		----------
+		None
+		  Nothing
+
+		Returns
+		-------
+		QSize object
+		  The width, height size hint for the PyQtLineEditProgressBar widget.
+
+		"""
 		if self._text_for_bounding_rect:
 			if self._size_hint_qrect:
 				# We cache these rather than doing the expensive font calls 
@@ -169,6 +258,24 @@ class PyQtLineEditProgressBar(QtWidgets.QLineEdit):
 	# -------------------------------------------------------------------------
 
 	def updateProgress(self, delta_float):
+		"""This is the method that needs to be called periodically to update
+		the LineEdit's progressbar.
+
+		Parameters
+		----------
+		delta_float : float
+		  A float that must be between 0.0 and 1.0. Represents the incremental
+		  progress of the progress bar for a single progress bar update cycle.
+
+		  For example, if the progress bar represents 6 seconds of work and its
+		  updated every second, then delta_float = 1/6.
+
+		Returns
+		-------
+		None
+		  Nothing
+		"""
+
 		if self._progressbar_behavior in LEFT_2_RIGHT:
 			if self._value >= 0.998:
 				self._value = 0.001
@@ -192,9 +299,38 @@ class PyQtLineEditProgressBar(QtWidgets.QLineEdit):
 		self._update_progress_bar()
 
 	def removeProgressBar(self):
+		"""This method removes the ProgressBar from the LineEdit background.
+
+		Parameters
+		----------
+		None
+		  Nothing
+
+		Returns
+		-------
+		None
+		  Nothing
+		"""
 		self._clear_progress_bar()
 
 	def setProgressBarColor(self, color_text):
+		"""Iniitalize the color used for the ProgressBar.
+
+		Parameters
+		----------
+		color_text : str
+		  A string describing a color value that is verifiable by the `colour package <https://pypi.org/project/colour/>`_. 
+
+		Returns
+		-------
+		None
+		  Nothing
+
+		Note
+		----
+		  If this method detects an invalid **color_text** parameter has been specified, the color will be set to the default color
+		  which is **pyqtlineeditprogressbar.DEFAULT_COLOR_GREEN**.
+		"""
 		if isinstance(color_text, str):
 			color_text = color_text.lower()
 			try:
@@ -206,9 +342,34 @@ class PyQtLineEditProgressBar(QtWidgets.QLineEdit):
 			self._color  = EMBEDDED_COLORS[DEFAULT_COLOR_NAME]
 
 	def getProgressBarColor(self):
+		"""Returns the color value associated with the ProgressBar."""
 		return(self._color)
 
 	def setProgressBarBehavior(self, behavior):
+		"""Configures the behavior of the ProgressBar based on the value of the **behavior** parameter.
+
+
+		Parameters
+		----------
+		behavior: str
+		  Must be one of four constant string values that describe the behavior of the ProgressBar:
+
+			**pyqtlineeditprogressbar.STARTS_EMPTY_FILLS_LEFT_TO_RIGHT**
+			**pyqtlineeditprogressbar.STARTS_EMPTY_FILLS_RIGHT_TO_LEFT**
+			**pyqtlineeditprogressbar.STARTS_FULL_EMPTIES_LEFT_TO_RIGHT**
+			**pyqtlineeditprogressbar.STARTS_FULL_EMPTIES_RIGHT_TO_LEFT**
+
+		Returns
+		-------
+		None
+		  Nothing
+
+		Note
+		----
+		If the behavior is not one of the four acceptable values, it will be set to the default
+		value of **pyqtlineeditprogressbar.STARTS_EMPTY_FILLS_LEFT_TO_RIGHT**.
+
+		"""
 		if isinstance(behavior, str):
 			behavior = behavior.lower()
 			if behavior in BEHAVIORS:
@@ -221,7 +382,38 @@ class PyQtLineEditProgressBar(QtWidgets.QLineEdit):
 		self._value, self._param_1, self._param_3, self._delta_sign = BEHAVIOR_MAP[self._progressbar_behavior]
 
 	def getBehavior(self):
+		"""Returns the how the ProgressBar is configured to behave.
+
+		Parameters
+		----------
+		None
+		  Nothing
+
+		Returns
+		-------
+		str
+		  A string describing how the ProgressBar is configured to behave. It will
+		  be one four string values:
+
+		  	**pyqtlineeditprogressbar.STARTS_EMPTY_FILLS_LEFT_TO_RIGHT**
+			**pyqtlineeditprogressbar.STARTS_EMPTY_FILLS_RIGHT_TO_LEFT**
+			**pyqtlineeditprogressbar.STARTS_FULL_EMPTIES_LEFT_TO_RIGHT**
+			**pyqtlineeditprogressbar.STARTS_FULL_EMPTIES_RIGHT_TO_LEFT**
+
+		"""
 		return(self._progressbar_behavior)
 
 	def getValue(self):
+		"""Returns the current value of the ProgressBar, which is between 0.0 and 1.0.
+
+		Parameters
+		----------
+		None
+		  Nothing
+
+		Returns
+		-------
+		float
+		  Current value of the ProgressBar, between 0.0 and 1.0.
+		"""
 		return(self._value)

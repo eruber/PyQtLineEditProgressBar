@@ -5,9 +5,37 @@
 # to native line endings on checkout.
 *.py text
 *.in text
+*.txt text
+*.ini text
+*.qss text
+*.htm text
+*.html text
+*.json text
+*.yaml text
+*.toml text
+*.sh text
+*.bat text
+
 
 # Declare files that will always have CRLF line endings on checkout.
 #*.sln text eol=crlf
 
 # Denote all files that are truly binary and should not be modified.
 *.gif binary
+*.pdn binary
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.ico binary
+*.mov binary
+*.mp4 binary
+*.mp3 binary
+*.flv binary
+*.fla binary
+*.swf binary
+*.gz binary
+*.zip binary
+*.7z binary
+*.ttf binary
+*.pyc binary
+

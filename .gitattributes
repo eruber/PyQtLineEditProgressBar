@@ -38,4 +38,6 @@
 *.7z binary
 *.ttf binary
 *.pyc binary
+*.pickle binary
+*.doctree binary
 

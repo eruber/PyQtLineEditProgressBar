@@ -17,20 +17,13 @@ PyQtLineEditProgressBar depends on the following third-party packages:
 ## Installation ##
 Via Python's package installer:
 
-	pip install PyQtLineEditProgressBar
-
-or from the package source as a user:
-
-	pip install . 
-
-or from the package source as a developer:
-
-	pip install -e .
+	pip install pyqtlineeditprogressbar
 
 ## Testing ##
-Once installed the **demo.py** file can be executed to demonstrate usage:
+Once installed the **demo.py** module can be executed to demonstrate usage:
 
-	python demo.py
+	from pyqtlineeditprogressbar import demo
+	demo.main()
 
 The results of executing this file should look similar to the animation below.
 

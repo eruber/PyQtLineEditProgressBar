@@ -98,9 +98,17 @@ class Dialog(QtWidgets.QDialog):
 
 		time.sleep(1)
 
-app = QtWidgets.QApplication([])
-window = Dialog()
-#window.resize(400, 50)
-window.setFixedSize(350, 350)
-window.show()
-app.exec_()
+# ----------------------------------------------------------------------------
+def main():
+	app = QtWidgets.QApplication([])
+	window = Dialog()
+	#window.resize(400, 50)
+	window.setFixedSize(350, 350)
+	window.show()
+	app.exec_()
+
+# ----------------------------------------------------------------------------
+# ----------------------------- main -----------------------------------------
+# ----------------------------------------------------------------------------
+if __name__ == "__main__":
+	main()

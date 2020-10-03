@@ -1,0 +1,351 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Introduction &mdash; PyQtLineEditProgressBar 0.3.0 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="API" href="api.html" />
+    <link rel="prev" title="PyQtLineEditProgressBar User Manual" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home" alt="Documentation Home"> PyQtLineEditProgressBar
+          
+
+          
+            
+            <img src="_static/logo.gif" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Introduction</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#configuring-color">Configuring Color</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#configuring-behavior">Configuring Behavior</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#the-demo-program">The Demo Program</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#caveat">Caveat</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#further-reading">Further Reading</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="api.html">API</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">PyQtLineEditProgressBar</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content style-external-links">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Introduction</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/intro.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <div class="rst-breadcrumbs-buttons" role="navigation" aria-label="breadcrumb navigation">
+      
+        <a href="api.html" class="btn btn-neutral float-right" title="API" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="index.html" class="btn btn-neutral float-left" title="PyQtLineEditProgressBar User Manual" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+  </div>
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="introduction">
+<span id="intro-label"></span><h1>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h1>
+<p>A PyQtLineEditProgressBar widget object can have its progressbar color and its progressbar behavior
+configured either at the time of the constructor call or by using method calls after a
+PyQtLineEditProgressBar widget has been initialized by the constructor call.</p>
+<div class="section" id="configuring-color">
+<h2>Configuring Color<a class="headerlink" href="#configuring-color" title="Permalink to this headline">¶</a></h2>
+<p>You may specify a custom color or choose between one of six built-in colors.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>When specifying a custom color, any color specification that the <a class="reference external" href="https://pypi.org/project/colour/">colour package</a>
+can handle is legal.</p>
+</div>
+<p>The built-in colors are accessible via constants in the <strong>pyqtlineeditprogressbar</strong> module like this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pyqtlineeditprogressbar</span> <span class="k">as</span> <span class="nn">lepbar</span>
+
+<span class="n">built_in_color_1</span> <span class="o">=</span> <span class="n">lepbar</span><span class="o">.</span><span class="n">DEFAULT_COLOR_GREEN</span>
+<span class="n">built_in_color_2</span> <span class="o">=</span> <span class="n">lepbar</span><span class="o">.</span><span class="n">DEFAULT_COLOR_RED</span>
+<span class="n">built_in_color_3</span> <span class="o">=</span> <span class="n">lepbar</span><span class="o">.</span><span class="n">DEFAULT_COLOR_ORANGE</span>
+<span class="n">built_in_color_4</span> <span class="o">=</span> <span class="n">lepbar</span><span class="o">.</span><span class="n">DEFAULT_COLOR_BLUE</span>
+<span class="n">built_in_color_5</span> <span class="o">=</span> <span class="n">lepbar</span><span class="o">.</span><span class="n">DEFAULT_COLOR_YELLOW</span>
+<span class="n">built_in_color_6</span> <span class="o">=</span> <span class="n">lepbar</span><span class="o">.</span><span class="n">DEFAULT_COLOR_PURPLE</span>
+</pre></div>
+</div>
+<img alt="_images/builtin_color_table.png" class="align-center" src="_images/builtin_color_table.png" />
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If no color is specified, the default is <strong>DEFAULT_COLOR_GREEN</strong>.</p>
+</div>
+<div class="section" id="configuring-color-when-calling-constructor">
+<h3>Configuring Color When Calling Constructor<a class="headerlink" href="#configuring-color-when-calling-constructor" title="Permalink to this headline">¶</a></h3>
+<p>Choosing a progressbar color when calling the constructor looks like this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pyqtlineeditprogressbar</span> <span class="k">as</span> <span class="nn">LEPBAR</span>
+<span class="kn">from</span> <span class="nn">pyqtlineeditprogressbar</span> <span class="kn">import</span> <span class="n">PyQtLineEditProgressBar</span>
+
+<span class="n">lepbar</span> <span class="o">=</span> <span class="n">PyQtLineEditProgressBar</span><span class="p">(</span><span class="n">progressbar_color</span><span class="o">=</span><span class="n">LEPBAR</span><span class="o">.</span><span class="n">DEFAULT_COLOR_PURPLE</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="configuring-color-via-method-call">
+<h3>Configuring Color via Method Call<a class="headerlink" href="#configuring-color-via-method-call" title="Permalink to this headline">¶</a></h3>
+<p>Choosing a progressbar color can be delayed until after the constructor call like this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pyqtlineeditprogressbar</span> <span class="k">as</span> <span class="nn">LEPBAR</span>
+<span class="kn">from</span> <span class="nn">pyqtlineeditprogressbar</span> <span class="kn">import</span> <span class="n">PyQtLineEditProgressBar</span>
+
+<span class="n">lepbar</span> <span class="o">=</span> <span class="n">PyQtLineEditProgressBar</span><span class="p">()</span>
+
+<span class="n">lepbar</span><span class="o">.</span><span class="n">setProgressBarColor</span><span class="p">(</span><span class="n">LEPBAR</span><span class="o">.</span><span class="n">DEFAULT_COLOR_PURPLE</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="configuring-behavior">
+<h2>Configuring Behavior<a class="headerlink" href="#configuring-behavior" title="Permalink to this headline">¶</a></h2>
+<p>You may specify one of four possible progressbar behaviors as described below.</p>
+<p>Each behavior defines three aspects of the progressbar:</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li><p>How the progressbar appears when initialized – empty or full</p></li>
+<li><p>How the progressbar reacts to an update – fills or empties</p></li>
+<li><p>The direction the progressbar fills or empties – from left to right, or from right to left</p></li>
+</ol>
+</div></blockquote>
+<p>The four progressbar behaviors are defined by for string constants:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pyqtlineeditprogressbar</span> <span class="k">as</span> <span class="nn">LEPBAR</span>
+
+<span class="n">behavior_1</span> <span class="o">=</span> <span class="n">LEPBAR</span><span class="o">.</span><span class="n">STARTS_EMPTY_FILLS_LEFT_TO_RIGHT</span>
+<span class="n">behavior_1</span> <span class="o">=</span> <span class="n">LEPBAR</span><span class="o">.</span><span class="n">STARTS_EMPTY_FILLS_RIGHT_TO_LEFT</span>
+<span class="n">behavior_1</span> <span class="o">=</span> <span class="n">LEPBAR</span><span class="o">.</span><span class="n">STARTS_FULL_EMPTIES_LEFT_TO_RIGHT</span>
+<span class="n">behavior_1</span> <span class="o">=</span> <span class="n">LEPBAR</span><span class="o">.</span><span class="n">STARTS_FULL_EMPTIES_RIGHT_TO_LEFT</span>
+</pre></div>
+</div>
+<img alt="_images/behaviors.gif" class="align-center" src="_images/behaviors.gif" />
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If no behavior is specified, the default is <strong>STARTS_EMPTY_FILLS_LEFT_TO_RIGHT</strong>.</p>
+</div>
+<div class="section" id="configuring-behavior-when-calling-constructor">
+<h3>Configuring Behavior When Calling Constructor<a class="headerlink" href="#configuring-behavior-when-calling-constructor" title="Permalink to this headline">¶</a></h3>
+<p>Choosing a progressbar behavior when calling the constructor looks like this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pyqtlineeditprogressbar</span> <span class="k">as</span> <span class="nn">LEPBAR</span>
+<span class="kn">from</span> <span class="nn">pyqtlineeditprogressbar</span> <span class="kn">import</span> <span class="n">PyQtLineEditProgressBar</span>
+
+<span class="n">lepbar</span> <span class="o">=</span> <span class="n">PyQtLineEditProgressBar</span><span class="p">(</span><span class="n">behavior</span><span class="o">=</span><span class="n">LEPBAR</span><span class="o">.</span><span class="n">STARTS_FULL_EMPTIES_LEFT_TO_RIGHT</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="configuring-behavior-via-method-call">
+<h3>Configuring Behavior via Method Call<a class="headerlink" href="#configuring-behavior-via-method-call" title="Permalink to this headline">¶</a></h3>
+<p>Choosing a behavior can be delayed until after the constructor call like this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pyqtlineeditprogressbar</span> <span class="k">as</span> <span class="nn">LEPBAR</span>
+<span class="kn">from</span> <span class="nn">pyqtlineeditprogressbar</span> <span class="kn">import</span> <span class="n">PyQtLineEditProgressBar</span>
+
+<span class="n">lepbar</span> <span class="o">=</span> <span class="n">PyQtLineEditProgressBar</span><span class="p">()</span>
+
+<span class="n">lepbar</span><span class="o">.</span><span class="n">setProgressBarBehavior</span><span class="p">(</span><span class="n">LEPBAR</span><span class="o">.</span><span class="n">STARTS_FULL_EMPTIES_LEFT_TO_RIGHT</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="the-demo-program">
+<h2>The Demo Program<a class="headerlink" href="#the-demo-program" title="Permalink to this headline">¶</a></h2>
+<p>The demo program illustrates all the colors (including a custom color) and all the behaviors.
+Run it from the root of the project like this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">demo</span><span class="o">.</span><span class="n">py</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="caveat">
+<h2>Caveat<a class="headerlink" href="#caveat" title="Permalink to this headline">¶</a></h2>
+<p>This package uses Qt Palettes and LinearGradients to implement the progressbar in the background color of the LineEdit widget.</p>
+<p>If you spend anytime whatsoever reading the Qt documentation on Palettes, it clearly states multiple times that the use of Palettes and Qt Style Sheets should not be mixed.</p>
+<p>So its highly likely that if this package is used as part of an application that changes color themes via Qt Style Sheets
+there might be compatibility issues.</p>
+<p>I would like to understand and solve this issue in the future, if possible.</p>
+</div>
+<div class="section" id="further-reading">
+<h2>Further Reading<a class="headerlink" href="#further-reading" title="Permalink to this headline">¶</a></h2>
+<p>For more details see the <a class="reference internal" href="api.html#api-label"><span class="std std-ref">API</span></a> section.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="api.html" class="btn btn-neutral float-right" title="API" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="index.html" class="btn btn-neutral float-left" title="PyQtLineEditProgressBar User Manual" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2020, E.R. Uber
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

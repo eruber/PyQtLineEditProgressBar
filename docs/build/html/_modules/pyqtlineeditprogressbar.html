@@ -1,0 +1,476 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>pyqtlineeditprogressbar &mdash; PyQtLineEditProgressBar 0.3.0 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> PyQtLineEditProgressBar
+          
+
+          
+            
+            <img src="../_static/logo.gif" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../intro.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api.html">API</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">PyQtLineEditProgressBar</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content style-external-links">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="index.html">Module code</a> &raquo;</li>
+        
+      <li>pyqtlineeditprogressbar</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for pyqtlineeditprogressbar</h1><div class="highlight"><pre>
+<span></span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">.. module:: pyqtlineeditprogressbar</span>
+<span class="sd">   :synopsis: A custom PyQt widget that creates a configurable progress bar as the background color of a QLineEdit widget.</span>
+
+<span class="sd">.. moduleauthor: E.R. Uber &lt;eruber@gmail.com&gt;</span>
+
+
+<span class="sd">PyQtLineEditProgressBar</span>
+
+<span class="sd">This module subclass Qt&#39;s QtLineEdit widget to manage a progress</span>
+<span class="sd">bar the is displayed as the background color of the QtLineEdit.</span>
+
+<span class="sd">REFERENCE:</span>
+<span class="sd">https://stackoverflow.com/questions/36972132/how-to-turn-qlineedit-background-into-a-progress-bar</span>
+
+<span class="sd">GPL LICENSE</span>
+<span class="sd">This file is part of the PyQtLineEditProgressBar package.</span>
+
+<span class="sd">AutoFoE is free software: you can redistribute it and/or modify</span>
+<span class="sd">it under the terms of the GNU General Public License as published by</span>
+<span class="sd">the Free Software Foundation, either version 3 of the License, or</span>
+<span class="sd">(at your option) any later version.</span>
+
+<span class="sd">AutoFoE is distributed in the hope that it will be useful,</span>
+<span class="sd">but WITHOUT ANY WARRANTY; without even the implied warranty of</span>
+<span class="sd">MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the</span>
+<span class="sd">GNU General Public License for more details.</span>
+
+<span class="sd">You should have received a copy of the GNU General Public License</span>
+<span class="sd">along with AutoFoE in the file named COPYING. If not, </span>
+<span class="sd">see &lt;https://www.gnu.org/licenses/&gt;.</span>
+
+<span class="sd">COPYRIGHT (C) 2019-2020 E.R. Uber (eruber@gmail.com)</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="c1"># ----------------------------------------------------------------------------</span>
+<span class="c1"># ------------------------ Python Standard Library ---------------------------</span>
+<span class="c1"># ----------------------------------------------------------------------------</span>
+<span class="kn">import</span> <span class="nn">time</span>
+
+<span class="c1"># ----------------------------------------------------------------------------</span>
+<span class="c1"># -------------------------- Third Party Packages ----------------------------</span>
+<span class="c1"># ----------------------------------------------------------------------------</span>
+<span class="kn">from</span> <span class="nn">PyQt5</span> <span class="kn">import</span> <span class="n">QtCore</span>
+<span class="kn">from</span> <span class="nn">PyQt5</span> <span class="kn">import</span> <span class="n">QtGui</span>
+<span class="kn">from</span> <span class="nn">PyQt5</span> <span class="kn">import</span> <span class="n">QtWidgets</span>
+
+<span class="kn">from</span> <span class="nn">colour</span> <span class="kn">import</span> <span class="n">Color</span>  <span class="c1"># https://pypi.org/project/colour/</span>
+
+<span class="c1"># ----------------------------------------------------------------------------</span>
+<span class="c1"># ----------------------- Module Global &amp; Constants --------------------------</span>
+<span class="c1"># ----------------------------------------------------------------------------</span>
+
+<span class="c1"># Default Embedded Color Names</span>
+<span class="n">DECN</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;green&#39;</span><span class="p">,</span> <span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="s1">&#39;blue&#39;</span><span class="p">,</span> <span class="s1">&#39;orange&#39;</span><span class="p">,</span> <span class="s1">&#39;yellow&#39;</span><span class="p">,</span> <span class="s1">&#39;purple&#39;</span><span class="p">]</span>
+
+<span class="n">DEFAULT_COLOR_GREEN</span>  <span class="o">=</span> <span class="s1">&#39;#aaff7f&#39;</span>   <span class="c1"># A pastel mint green</span>
+<span class="n">DEFAULT_COLOR_RED</span>    <span class="o">=</span> <span class="s1">&#39;#ffa5aa&#39;</span>   <span class="c1"># A pastel red</span>
+<span class="n">DEFAULT_COLOR_BLUE</span>   <span class="o">=</span> <span class="s1">&#39;#b3fff4&#39;</span>   <span class="c1"># A pastel blue   </span>
+<span class="n">DEFAULT_COLOR_ORANGE</span> <span class="o">=</span> <span class="s1">&#39;#ffcc74&#39;</span>   <span class="c1"># A pastel orange</span>
+<span class="n">DEFAULT_COLOR_YELLOW</span> <span class="o">=</span> <span class="s1">&#39;#ffff00&#39;</span>   <span class="c1"># A pastel yellow</span>
+<span class="n">DEFAULT_COLOR_PURPLE</span> <span class="o">=</span> <span class="s1">&#39;#e4b7ff&#39;</span>   <span class="c1"># A pastel yellow</span>
+
+<span class="n">EMBEDDED_COLORS</span> <span class="o">=</span> <span class="p">{</span>
+	<span class="n">DECN</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="p">:</span> <span class="n">DEFAULT_COLOR_GREEN</span><span class="p">,</span> 
+	<span class="n">DECN</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="p">:</span> <span class="n">DEFAULT_COLOR_RED</span><span class="p">,</span>   
+	<span class="n">DECN</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="p">:</span> <span class="n">DEFAULT_COLOR_BLUE</span><span class="p">,</span>  
+	<span class="n">DECN</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="p">:</span> <span class="n">DEFAULT_COLOR_ORANGE</span><span class="p">,</span>
+	<span class="n">DECN</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span> <span class="p">:</span> <span class="n">DEFAULT_COLOR_YELLOW</span><span class="p">,</span>
+	<span class="n">DECN</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span> <span class="p">:</span> <span class="n">DEFAULT_COLOR_PURPLE</span><span class="p">,</span>
+<span class="p">}</span>
+
+<span class="n">DEFAULT_COLOR_NAME</span> <span class="o">=</span> <span class="n">DECN</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+<span class="n">STARTS_EMPTY_FILLS_LEFT_TO_RIGHT</span>  <span class="o">=</span> <span class="s1">&#39;starts-empty-fills-left-to-right&#39;</span>
+<span class="n">STARTS_EMPTY_FILLS_RIGHT_TO_LEFT</span>  <span class="o">=</span> <span class="s1">&#39;starts-empty-fills-right-to-left&#39;</span>
+<span class="n">STARTS_FULL_EMPTIES_LEFT_TO_RIGHT</span> <span class="o">=</span> <span class="s1">&#39;starts-filled-empties-left-to-right&#39;</span>
+<span class="n">STARTS_FULL_EMPTIES_RIGHT_TO_LEFT</span> <span class="o">=</span> <span class="s1">&#39;starts-filled-empties-right-to-left&#39;</span>
+
+<span class="n">BEHAVIORS</span> <span class="o">=</span> <span class="p">[</span><span class="n">STARTS_EMPTY_FILLS_LEFT_TO_RIGHT</span><span class="p">,</span>  <span class="n">STARTS_EMPTY_FILLS_RIGHT_TO_LEFT</span><span class="p">,</span>
+			 <span class="n">STARTS_FULL_EMPTIES_LEFT_TO_RIGHT</span><span class="p">,</span> <span class="n">STARTS_FULL_EMPTIES_RIGHT_TO_LEFT</span><span class="p">]</span>
+
+<span class="n">LEFT_2_RIGHT</span> <span class="o">=</span> <span class="p">[</span><span class="n">STARTS_EMPTY_FILLS_LEFT_TO_RIGHT</span><span class="p">,</span> <span class="n">STARTS_FULL_EMPTIES_LEFT_TO_RIGHT</span><span class="p">]</span>
+<span class="n">RIGHT_2_LEFT</span> <span class="o">=</span> <span class="p">[</span><span class="n">STARTS_EMPTY_FILLS_RIGHT_TO_LEFT</span><span class="p">,</span> <span class="n">STARTS_FULL_EMPTIES_RIGHT_TO_LEFT</span><span class="p">]</span>
+
+<span class="n">BEHAVIOR_MAP</span> <span class="o">=</span> <span class="p">{</span> <span class="c1"># init_value, set_color_at_1, set_color_at_3, delta_sign</span>
+	<span class="n">BEHAVIORS</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="p">:</span> <span class="p">[</span><span class="mf">0.001</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.001</span><span class="p">,</span>  <span class="mf">0.001</span><span class="p">,</span>  <span class="mi">1</span><span class="p">],</span>  <span class="c1"># Count up</span>
+	<span class="n">BEHAVIORS</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="p">:</span> <span class="p">[</span><span class="mf">0.999</span><span class="p">,</span>  <span class="mf">0.001</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.001</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">],</span>  <span class="c1"># Count up</span>
+	<span class="n">BEHAVIORS</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="p">:</span> <span class="p">[</span><span class="mf">0.001</span><span class="p">,</span>  <span class="mf">0.001</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.001</span><span class="p">,</span>  <span class="mi">1</span><span class="p">],</span>  <span class="c1"># Count down</span>
+	<span class="n">BEHAVIORS</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="p">:</span> <span class="p">[</span><span class="mf">0.999</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.001</span><span class="p">,</span>  <span class="mf">0.001</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">],</span>  <span class="c1"># Count down</span>
+<span class="p">}</span>
+
+<span class="n">DEFAULT_BEHAVIOR</span> <span class="o">=</span> <span class="n">STARTS_EMPTY_FILLS_LEFT_TO_RIGHT</span>
+
+<span class="c1"># ----------------------------------------------------------------------------</span>
+<span class="c1"># --------------------- Module Classes &amp; Functions ---------------------------</span>
+<span class="c1"># ----------------------------------------------------------------------------</span>
+<span class="c1"># https://doc.qt.io/qt-5/qlineedit.html</span>
+<div class="viewcode-block" id="PyQtLineEditProgressBar"><a class="viewcode-back" href="../api.html#pyqtlineeditprogressbar.PyQtLineEditProgressBar">[docs]</a><span class="k">class</span> <span class="nc">PyQtLineEditProgressBar</span><span class="p">(</span><span class="n">QtWidgets</span><span class="o">.</span><span class="n">QLineEdit</span><span class="p">):</span>
+
+	<span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">contents</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">parent</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> 
+				<span class="n">read_only</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> 
+				<span class="n">progressbar_color</span><span class="o">=</span><span class="n">EMBEDDED_COLORS</span><span class="p">[</span><span class="n">DECN</span><span class="p">[</span><span class="mi">0</span><span class="p">]],</span> 
+				<span class="n">behavior</span><span class="o">=</span><span class="n">DEFAULT_BEHAVIOR</span><span class="p">,</span>
+				<span class="n">text_for_bounding_rect</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+				<span class="p">):</span>
+		<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">		Constructor for the PyQtLineEditProgressBar Class</span>
+
+<span class="sd">		Parameters</span>
+<span class="sd">		----------</span>
+<span class="sd">		contents : str</span>
+<span class="sd">		  Text displayed in the LineEdit widget (optional, can be set later with setText() method).</span>
+<span class="sd">		parent : widget reference</span>
+<span class="sd">		  The parent widget.</span>
+<span class="sd">		read_only : bool</span>
+<span class="sd">		  Defaults to True which makes the LineEdit widget read only.</span>
+<span class="sd">		progressbar_color : str</span>
+<span class="sd">		  This must be a string describing a color, such as #1435fe, or some other color</span>
+<span class="sd">		  representation like, &#39;blue&#39;, or &#39;rgb(112,255,90)&#39;. This field is validated using</span>
+<span class="sd">		  the `colour package &lt;https://pypi.org/project/colour/&gt;`_. An color specifier</span>
+<span class="sd">		  accepted by colour will pass input validation.</span>
+<span class="sd">		  There are six built-in colors that can be specified here:</span>
+<span class="sd">		    pyqtlineeditprogressbar.DEFAULT_COLOR_GREEN </span>
+<span class="sd">		    pyqtlineeditprogressbar.DEFAULT_COLOR_RED   </span>
+<span class="sd">		    pyqtlineeditprogressbar.DEFAULT_COLOR_ORANGE</span>
+<span class="sd">		    pyqtlineeditprogressbar.DEFAULT_COLOR_BLUE  </span>
+<span class="sd">		    pyqtlineeditprogressbar.DEFAULT_COLOR_YELLOW</span>
+<span class="sd">		    pyqtlineeditprogressbar.DEFAULT_COLOR_PURPLE</span>
+<span class="sd">		  If not specified, DEFAULT_COLOR_GREEN, is used.</span>
+<span class="sd">		behavior : str</span>
+<span class="sd">		  A rather complicated looking string that identifies one of the four possible</span>
+<span class="sd">		  behaviors of the progress bar:</span>
+<span class="sd">		  	pyqtlineeditprogressbar.STARTS_EMPTY_FILLS_LEFT_TO_RIGHT </span>
+<span class="sd">			pyqtlineeditprogressbar.STARTS_EMPTY_FILLS_RIGHT_TO_LEFT </span>
+<span class="sd">			pyqtlineeditprogressbar.STARTS_FULL_EMPTIES_LEFT_TO_RIGHT</span>
+<span class="sd">			pyqtlineeditprogressbar.STARTS_FULL_EMPTIES_RIGHT_TO_LEFT</span>
+<span class="sd">		  If not specified, the default behavior is STARTS_EMPTY_FILLS_LEFT_TO_RIGHT.</span>
+<span class="sd">		text_for_bounding_rect : str</span>
+<span class="sd">		  If you have trouble sizing the LineEdit widget&#39;s width, and the contents of</span>
+<span class="sd">		  this LineEdit widget have a fixed format, then this parameter may be specified </span>
+<span class="sd">		  to be used by the overridden sizeHint() method to access the Qt Font Metrics </span>
+<span class="sd">		  sub-system to specify a width width for the font being used. </span>
+<span class="sd">		  For example:</span>
+<span class="sd">		  	text_for_bounding_rect=&quot; 888/888 [88] &quot;</span>
+<span class="sd">		  If not specified, then the standard Qt sizeHint() is called.</span>
+
+<span class="sd">		&quot;&quot;&quot;</span>
+		<span class="nb">super</span><span class="p">(</span><span class="n">PyQtLineEditProgressBar</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">parent</span><span class="o">=</span><span class="n">parent</span><span class="p">)</span> 
+
+		<span class="bp">self</span><span class="o">.</span><span class="n">_parent</span>   <span class="o">=</span> <span class="n">parent</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">_contents</span> <span class="o">=</span> <span class="n">contents</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">_text_for_bounding_rect</span> <span class="o">=</span> <span class="n">text_for_bounding_rect</span>
+		
+		<span class="bp">self</span><span class="o">.</span><span class="n">_size_hint_qrect</span> <span class="o">=</span> <span class="kc">None</span>
+
+		<span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_contents</span><span class="p">:</span>
+			<span class="bp">self</span><span class="o">.</span><span class="n">setText</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_contents</span><span class="p">)</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">setReadOnly</span><span class="p">(</span><span class="n">read_only</span><span class="p">)</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">setProgressBarColor</span><span class="p">(</span><span class="n">progressbar_color</span><span class="p">)</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">setProgressBarBehavior</span><span class="p">(</span><span class="n">behavior</span><span class="p">)</span>
+
+		<span class="bp">self</span><span class="o">.</span><span class="n">_update_progress_bar</span><span class="p">()</span>
+
+	<span class="c1"># https://doc.qt.io/qtforpython/PySide2/QtGui/QLinearGradient.html#detailed-description</span>
+	<span class="c1"># https://doc.qt.io/qt-5/qlineargradient.html#details</span>
+	<span class="k">def</span> <span class="nf">_update_progress_bar</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+		<span class="n">palette</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">palette</span><span class="p">()</span>
+		<span class="n">QRectF</span> <span class="o">=</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QRectF</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rect</span><span class="p">())</span>
+		<span class="n">gradient</span> <span class="o">=</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QLinearGradient</span><span class="p">(</span><span class="n">QRectF</span><span class="o">.</span><span class="n">topLeft</span><span class="p">(),</span> <span class="n">QRectF</span><span class="o">.</span><span class="n">topRight</span><span class="p">())</span>
+		<span class="c1"># https://doc.qt.io/qt-5/qgradient.html#setColorAt</span>
+		<span class="n">gradient</span><span class="o">.</span><span class="n">setColorAt</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_value</span><span class="o">+</span><span class="bp">self</span><span class="o">.</span><span class="n">_param_1</span><span class="p">,</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QColor</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_color</span><span class="p">))</span>
+		<span class="n">gradient</span><span class="o">.</span><span class="n">setColorAt</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_value</span><span class="p">,</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QColor</span><span class="p">(</span><span class="s1">&#39;#ffffff&#39;</span><span class="p">))</span>
+		<span class="n">gradient</span><span class="o">.</span><span class="n">setColorAt</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_value</span><span class="o">+</span><span class="bp">self</span><span class="o">.</span><span class="n">_param_3</span><span class="p">,</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QColor</span><span class="p">(</span><span class="s1">&#39;#ffffff&#39;</span><span class="p">))</span>
+		<span class="n">palette</span><span class="o">.</span><span class="n">setBrush</span><span class="p">(</span><span class="n">QtGui</span><span class="o">.</span><span class="n">QPalette</span><span class="o">.</span><span class="n">Base</span><span class="p">,</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QBrush</span><span class="p">(</span><span class="n">gradient</span><span class="p">))</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">setPalette</span><span class="p">(</span><span class="n">palette</span><span class="p">)</span>		
+	
+	<span class="k">def</span> <span class="nf">_clear_progress_bar</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+		<span class="n">palette</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">palette</span><span class="p">()</span>
+		<span class="n">QRectF</span> <span class="o">=</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QRectF</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rect</span><span class="p">())</span>
+		<span class="n">gradient</span> <span class="o">=</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QLinearGradient</span><span class="p">(</span><span class="n">QRectF</span><span class="o">.</span><span class="n">topLeft</span><span class="p">(),</span> <span class="n">QRectF</span><span class="o">.</span><span class="n">topRight</span><span class="p">())</span>
+		<span class="c1"># https://doc.qt.io/qt-5/qgradient.html#setColorAt</span>
+		<span class="n">gradient</span><span class="o">.</span><span class="n">setColorAt</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QColor</span><span class="p">(</span><span class="s1">&#39;#ffffff&#39;</span><span class="p">))</span>
+		<span class="c1">#gradient.setColorAt(value, QtGui.QColor(&#39;#ffffff&#39;))</span>
+		<span class="n">gradient</span><span class="o">.</span><span class="n">setColorAt</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QColor</span><span class="p">(</span><span class="s1">&#39;#ffffff&#39;</span><span class="p">))</span>
+		<span class="n">palette</span><span class="o">.</span><span class="n">setBrush</span><span class="p">(</span><span class="n">QtGui</span><span class="o">.</span><span class="n">QPalette</span><span class="o">.</span><span class="n">Base</span><span class="p">,</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QBrush</span><span class="p">(</span><span class="n">gradient</span><span class="p">))</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">setPalette</span><span class="p">(</span><span class="n">palette</span><span class="p">)</span>		
+
+	<span class="c1"># -------------------------------------------------------------------------</span>
+	<span class="c1"># QLineEdit Methods that are over-ridden</span>
+	<span class="c1"># -------------------------------------------------------------------------</span>
+	
+<div class="viewcode-block" id="PyQtLineEditProgressBar.sizeHint"><a class="viewcode-back" href="../api.html#pyqtlineeditprogressbar.PyQtLineEditProgressBar.sizeHint">[docs]</a>	<span class="k">def</span> <span class="nf">sizeHint</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+		<span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_text_for_bounding_rect</span><span class="p">:</span>
+			<span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_size_hint_qrect</span><span class="p">:</span>
+				<span class="c1"># We cache these rather than doing the expensive font calls </span>
+				<span class="c1"># over and over</span>
+				<span class="n">w</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_size_hint_qrect</span><span class="o">.</span><span class="n">width</span><span class="p">()</span>
+				<span class="n">h</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_size_hint_qrect</span><span class="o">.</span><span class="n">height</span><span class="p">()</span>
+			<span class="k">else</span><span class="p">:</span>	
+				<span class="n">metrics</span> <span class="o">=</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QFontMetrics</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">font</span><span class="p">())</span>
+
+				<span class="c1"># These are probably the widest integers...</span>
+				<span class="bp">self</span><span class="o">.</span><span class="n">_size_hint_qrect</span> <span class="o">=</span> <span class="n">metrics</span><span class="o">.</span><span class="n">boundingRect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_text_for_bounding_rect</span><span class="p">)</span>
+				<span class="n">w</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_size_hint_qrect</span><span class="o">.</span><span class="n">width</span><span class="p">()</span>
+				<span class="n">h</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_size_hint_qrect</span><span class="o">.</span><span class="n">height</span><span class="p">()</span>
+
+			<span class="k">return</span><span class="p">(</span><span class="n">QtCore</span><span class="o">.</span><span class="n">QSize</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="n">h</span><span class="p">))</span>
+		<span class="k">else</span><span class="p">:</span>  
+			<span class="k">return</span><span class="p">(</span><span class="nb">super</span><span class="p">(</span><span class="n">PyQtLineEditProgressBar</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">sizeHint</span><span class="p">())</span></div>
+
+	<span class="c1"># -------------------------------------------------------------------------</span>
+	<span class="c1"># Public API</span>
+	<span class="c1"># -------------------------------------------------------------------------</span>
+
+<div class="viewcode-block" id="PyQtLineEditProgressBar.updateProgress"><a class="viewcode-back" href="../api.html#pyqtlineeditprogressbar.PyQtLineEditProgressBar.updateProgress">[docs]</a>	<span class="k">def</span> <span class="nf">updateProgress</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">delta_float</span><span class="p">):</span>
+		<span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_progressbar_behavior</span> <span class="ow">in</span> <span class="n">LEFT_2_RIGHT</span><span class="p">:</span>
+			<span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_value</span> <span class="o">&gt;=</span> <span class="mf">0.998</span><span class="p">:</span>
+				<span class="bp">self</span><span class="o">.</span><span class="n">_value</span> <span class="o">=</span> <span class="mf">0.001</span>
+			<span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">_value</span> <span class="o">&gt;</span> <span class="mf">0.9</span><span class="p">:</span>
+				<span class="bp">self</span><span class="o">.</span><span class="n">_value</span> <span class="o">=</span> <span class="mf">0.999</span>
+			<span class="k">else</span><span class="p">:</span>
+				<span class="bp">self</span><span class="o">.</span><span class="n">_value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_value</span> <span class="o">+</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_delta_sign</span> <span class="o">*</span> <span class="n">delta_float</span><span class="p">)</span>
+		<span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">_progressbar_behavior</span> <span class="ow">in</span> <span class="n">RIGHT_2_LEFT</span><span class="p">:</span>
+			<span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_value</span> <span class="o">&lt;=</span> <span class="mf">0.0010</span><span class="p">:</span>
+				<span class="bp">self</span><span class="o">.</span><span class="n">_value</span> <span class="o">=</span> <span class="mf">0.999</span>
+			<span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">_value</span> <span class="o">&lt;</span> <span class="mf">0.100</span><span class="p">:</span>
+				<span class="bp">self</span><span class="o">.</span><span class="n">_value</span> <span class="o">=</span> <span class="mf">0.001</span>
+			<span class="k">else</span><span class="p">:</span>
+				<span class="bp">self</span><span class="o">.</span><span class="n">_value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_value</span> <span class="o">+</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_delta_sign</span> <span class="o">*</span> <span class="n">delta_float</span><span class="p">)</span>
+
+		<span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_value</span> <span class="o">&gt;</span> <span class="mf">0.999</span><span class="p">:</span>
+			<span class="bp">self</span><span class="o">.</span><span class="n">_value</span> <span class="o">=</span> <span class="mf">0.999</span>
+		<span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_value</span> <span class="o">&lt;</span> <span class="mf">0.001</span><span class="p">:</span>
+			<span class="bp">self</span><span class="o">.</span><span class="n">_value</span> <span class="o">=</span> <span class="mf">0.001</span>
+
+		<span class="bp">self</span><span class="o">.</span><span class="n">_update_progress_bar</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="PyQtLineEditProgressBar.removeProgressBar"><a class="viewcode-back" href="../api.html#pyqtlineeditprogressbar.PyQtLineEditProgressBar.removeProgressBar">[docs]</a>	<span class="k">def</span> <span class="nf">removeProgressBar</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">_clear_progress_bar</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="PyQtLineEditProgressBar.setProgressBarColor"><a class="viewcode-back" href="../api.html#pyqtlineeditprogressbar.PyQtLineEditProgressBar.setProgressBarColor">[docs]</a>	<span class="k">def</span> <span class="nf">setProgressBarColor</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">color_text</span><span class="p">):</span>
+		<span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">color_text</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+			<span class="n">color_text</span> <span class="o">=</span> <span class="n">color_text</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+			<span class="k">try</span><span class="p">:</span>
+				<span class="n">c</span> <span class="o">=</span> <span class="n">Color</span><span class="p">(</span><span class="n">color_text</span><span class="p">)</span>
+				<span class="bp">self</span><span class="o">.</span><span class="n">_color</span> <span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="n">hex_l</span>
+			<span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+				<span class="bp">self</span><span class="o">.</span><span class="n">_color</span>  <span class="o">=</span> <span class="n">EMBEDDED_COLORS</span><span class="p">[</span><span class="n">DEFAULT_COLOR_NAME</span><span class="p">]</span>
+		<span class="k">else</span><span class="p">:</span>
+			<span class="bp">self</span><span class="o">.</span><span class="n">_color</span>  <span class="o">=</span> <span class="n">EMBEDDED_COLORS</span><span class="p">[</span><span class="n">DEFAULT_COLOR_NAME</span><span class="p">]</span></div>
+
+<div class="viewcode-block" id="PyQtLineEditProgressBar.getProgressBarColor"><a class="viewcode-back" href="../api.html#pyqtlineeditprogressbar.PyQtLineEditProgressBar.getProgressBarColor">[docs]</a>	<span class="k">def</span> <span class="nf">getProgressBarColor</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+		<span class="k">return</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_color</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="PyQtLineEditProgressBar.setProgressBarBehavior"><a class="viewcode-back" href="../api.html#pyqtlineeditprogressbar.PyQtLineEditProgressBar.setProgressBarBehavior">[docs]</a>	<span class="k">def</span> <span class="nf">setProgressBarBehavior</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">behavior</span><span class="p">):</span>
+		<span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">behavior</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+			<span class="n">behavior</span> <span class="o">=</span> <span class="n">behavior</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+			<span class="k">if</span> <span class="n">behavior</span> <span class="ow">in</span> <span class="n">BEHAVIORS</span><span class="p">:</span>
+				<span class="bp">self</span><span class="o">.</span><span class="n">_progressbar_behavior</span> <span class="o">=</span> <span class="n">behavior</span>
+			<span class="k">else</span><span class="p">:</span>
+				<span class="bp">self</span><span class="o">.</span><span class="n">_progressbar_behavior</span> <span class="o">=</span> <span class="n">DEFAULT_BEHAVIOR</span>
+		<span class="k">else</span><span class="p">:</span>
+			<span class="bp">self</span><span class="o">.</span><span class="n">_progressbar_behavior</span> <span class="o">=</span> <span class="n">DEFAULT_BEHAVIOR</span>
+
+		<span class="bp">self</span><span class="o">.</span><span class="n">_value</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_param_1</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_param_3</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_delta_sign</span> <span class="o">=</span> <span class="n">BEHAVIOR_MAP</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_progressbar_behavior</span><span class="p">]</span></div>
+
+<div class="viewcode-block" id="PyQtLineEditProgressBar.getBehavior"><a class="viewcode-back" href="../api.html#pyqtlineeditprogressbar.PyQtLineEditProgressBar.getBehavior">[docs]</a>	<span class="k">def</span> <span class="nf">getBehavior</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+		<span class="k">return</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_progressbar_behavior</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="PyQtLineEditProgressBar.getValue"><a class="viewcode-back" href="../api.html#pyqtlineeditprogressbar.PyQtLineEditProgressBar.getValue">[docs]</a>	<span class="k">def</span> <span class="nf">getValue</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+		<span class="k">return</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_value</span><span class="p">)</span></div></div>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2020, E.R. Uber
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

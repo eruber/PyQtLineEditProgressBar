@@ -40,4 +40,6 @@
 *.pyc binary
 *.pickle binary
 *.doctree binary
+*.inv binary
+
 

@@ -1,0 +1,7 @@
+pyqtlineeditprogressbar
+=======================
+
+.. toctree::
+   :maxdepth: 4
+
+   pyqtlineeditprogressbar

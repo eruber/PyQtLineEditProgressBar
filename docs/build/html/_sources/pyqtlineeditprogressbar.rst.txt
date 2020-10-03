@@ -1,0 +1,10 @@
+pyqtlineeditprogressbar package
+===============================
+
+Module contents
+---------------
+
+.. automodule:: pyqtlineeditprogressbar
+   :members:
+   :undoc-members:
+   :show-inheritance:

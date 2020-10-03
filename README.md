@@ -4,7 +4,7 @@
 ## Introduction ##
 This widget sub-classes the [QLineEdit](https://doc.qt.io/qtforpython/PySide2/QtWidgets/QLineEdit.html) widget to add a progress bar as its background color.
 
-Read the User Manual in the **docs/build/html/index.html** file for more details.
+Read the [User Manual](https://eruber.github.io/PyQtLineEditProgressBar/build/html/index.html).
 
 ## Dependencies ##
 PyQtLineEditProgressBar depends on the following third-party packages:
@@ -47,7 +47,7 @@ This code is based off of a discussion at [StackOverflow](https://stackoverflow.
 
 ## Usage ##
 Inspect the **demo.py** code for examples of how to use ** PyQtLineEditProgressBar**
-and read the user manual documentation in the **docs/build/html/index.html** or online at the Read The Docs once I get it posted there.
+and read the [user manual documentation](https://eruber.github.io/PyQtLineEditProgressBar/build/html/index.html).
 
 
 ## Caveat ##

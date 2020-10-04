@@ -12,7 +12,7 @@ with open(path.join(this_directory, 'README.md'), encoding='utf-8') as f:
     long_description = f.read()
 
 setup(name='pyqtlineeditprogressbar',
-		version='0.3.4',
+		version='0.3.5',
 		description='A custom PyQt widget that places a configurable progress bar in the background of a QLineEdit widget.',
 		url='http://github.com/eruber/pyqtlineeditprogressbar',
 		download_url="https://github.com/eruber/PyQtLineEditProgressBar/archive/v0.3.0.tar.gz",

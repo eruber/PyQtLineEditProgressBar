@@ -28,7 +28,7 @@ Once installed the **demo.py** module can be executed to demonstrate usage:
 The results of executing this file should look similar to the animation below.
 
 <br>
-<div style="text-align:center"><img align="center" src="https://github.com/eruber/PyQtLineEditProgressBar/blob/master/demo.gif"></div>
+<div style="text-align:center"><img align="center" src="https://raw.githubusercontent.com/eruber/PyQtLineEditProgressBar/master/demo.gif"></div>
 
 
 ## License ##
